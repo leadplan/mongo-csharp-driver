@@ -28,7 +28,8 @@ namespace MongoDB.Driver.Linq.Expressions
         public SelectExpression(Expression source, string itemName, Expression selector)
         {
             _source = Ensure.IsNotNull(source, nameof(source));
-            _itemName = Ensure.IsNotNull(itemName, nameof(itemName));
+            // Workaround: Odata partial type is not supported
+            _itemName = itemName ?? "anonymous"; //Ensure.IsNotNull(itemName, nameof(itemName));
             _selector = Ensure.IsNotNull(selector, nameof(selector));
         }
 
